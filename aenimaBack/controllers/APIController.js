@@ -110,7 +110,7 @@ var APIController = {
                 for (var i = 0 ; i < req.files.length ; i ++){
                     db.Image.create({
                        id_product : result,
-                        path : req.files[i].originalname,
+                        path : req.files[i].filename,
                         name : req.files[i].originalname
                     })
                 }

@@ -1,5 +1,6 @@
 
 window.addEventListener('load', function(e){
+
     var body =document.querySelector('body');
     var row = document.querySelector('#row');
 
@@ -37,15 +38,17 @@ window.addEventListener('load', function(e){
         })
         .then(response => response.json())
             .then(response => {
+                console.log('paso por el OK')
                 if(response.meta.state == 'OK'){  
-                    getProducts();
-                    $("#newProductModal").modal('hide');
+                    //getProducts();
+                    $('#newProductModal').modal('hide');
                 }
         }).catch(error => console.log(error))
         })
-        getProducts();
 
-    formEditProduct.addEventListener("submit", function name(ev) {
+    getProducts();
+
+   /* formEditProduct.addEventListener("submit", function name(ev) {
     ev.preventDefault()
     let url = 'http://localhost:3000/api/newProduct';
     let image = document.getElementById('image');
@@ -66,7 +69,7 @@ window.addEventListener('load', function(e){
                 }
         }).catch(error => console.log(error))
         })
-        getProducts();    
+        getProducts();    */
 })
 
     
