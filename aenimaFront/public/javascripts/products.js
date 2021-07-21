@@ -1,5 +1,6 @@
 
 window.addEventListener('load', function(e){
+    
 
     var body =document.querySelector('body');
     var row = document.querySelector('#row');
@@ -14,6 +15,7 @@ window.addEventListener('load', function(e){
 
 
 
+    getProducts();
 
     $(document).on('click', '.delete', function (evt) {
         console.log($(this).attr("id"));
@@ -38,15 +40,15 @@ window.addEventListener('load', function(e){
         })
         .then(response => response.json())
             .then(response => {
-                console.log('paso por el OK')
                 if(response.meta.state == 'OK'){  
-                    //getProducts();
-                    $('#newProductModal').modal('hide');
+                    console.log('paso por el OK')
+                    $('#newProductModal').hide();
+                    $('.modal-backdrop').hide();
+                    getProducts();
                 }
         }).catch(error => console.log(error))
         })
 
-    getProducts();
 
    /* formEditProduct.addEventListener("submit", function name(ev) {
     ev.preventDefault()
@@ -78,13 +80,14 @@ const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 
 function getProducts(){
+    $('#newProductModal').modal('hide');
     fetch('http://localhost:3000/api/products')
     .then(function(response){
         return response.json();
     })
     .then(function(result){
-        row.innerHTML = '';
         console.log(result);
+        if(result != null){
         result.data.rows.forEach(product => {
             row.innerHTML += 
             '<div class="col-sm-3">' +
@@ -102,7 +105,7 @@ function getProducts(){
               '</div>' +
               '</div>'
         })
-
+    }
 })
     .catch(function(error){
         console.log(error);
@@ -116,6 +119,8 @@ function deleteProduct(id){
     })
     .then(function(result){
         console.log(result);
+        row.innerHTML = ''
+
     if(result.meta. state == "OK"){
         getProducts();
     }
